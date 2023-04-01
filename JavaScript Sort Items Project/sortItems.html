@@ -1,0 +1,99 @@
+<!-- HTML CSS JS in one file -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elements of HTML</title>
+    <!-- <link rel="stylesheet" href="style.css"/> -->
+    <style>
+      body {
+        background-color: rgb(66, 66, 66);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body class="bg-dark">
+    <div class="container bg-info p-4">
+      <h1 class="text-center">Buy Products</h1>
+      <ul class="list-group">
+        <!-- <li class="list-group-item">
+          Mobile <span class="float-right">$200</span>
+        </li> -->
+      </ul>
+      <button
+        type="button"
+        class="btn text-body btn-warning btn-lg mt-4 mx-auto d-block sort-btn"
+      >
+        Sort Items by Price
+      </button>
+    </div>
+    <!-- <script src="script.js"></script> -->
+    <script>
+      const items = [
+        {
+          name: "iPad",
+          price: 1300,
+        },
+        {
+          name: "Laptop",
+          price: 300,
+        },
+        {
+          name: "Headphone",
+          price: 100,
+        },
+        {
+          name: "Desktop",
+          price: 500,
+        },
+      ];
+
+      //  <li class="list-group-item">
+      //      Mobile <span class="float-right">$200</span>
+      //  </li>
+      //The below fn changes the HTML elements like above using Js
+      function generateList() {
+        const ul = document.querySelector(".list-group");
+        ul.innerHTML = ""; //resets initials
+
+        items.forEach((item) => {
+          const li = document.createElement("li"); // creates <p></p>
+          li.classList.add("list-group-item"); //<li class="list-group-item">
+
+          const name = document.createTextNode(item.name);
+          li.appendChild(name);
+
+          const span = document.createElement("span");
+          span.classList.add("float-right"); //<span class="float-right"> </span>
+
+          const price = document.createTextNode("$ " + item.price);
+          span.appendChild(price); //<span class="float-right">$ price</span>
+
+          li.appendChild(span); //inject values in HTML
+          ul.appendChild(li); //inject values
+        });
+      }
+      // generateList();
+
+      window.addEventListener("load", generateList);
+
+      const button = document.querySelector(".sort-btn");
+
+      //Inbuilt sort function
+      button.addEventListener("click", () => {
+        items.sort((a, b) => a.price - b.price);
+        generateList();
+      });
+    </script>
+  </body>
+</html>
